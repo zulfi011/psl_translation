@@ -1,0 +1,8 @@
+name: tcn
+params:
+  channels: [64, 128, 128]
+  kernel_size: 3
+  dilations: [1, 2, 4]
+  dropout: 0.3
+  head_dropout: 0.4
+  input_proj: 128

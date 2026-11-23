@@ -1,0 +1,7 @@
+# Baseline: the FYP v1 architecture + v1 preprocessing, evaluated with LOSO.
+name: exp001_tcn_v1_baseline
+data: data/landmarks_v1_raw.yaml
+model: model/tcn_v1.yaml
+train: train/default.yaml
+overrides:
+  train.batch_size: 8

@@ -1,0 +1,6 @@
+# Ablation: v1 architecture with v2 preprocessing — separates the effect of
+# the data pipeline from the effect of the architecture.
+name: exp003_tcn_v1_v2data
+data: data/landmarks_v2.yaml
+model: model/tcn_v1.yaml
+train: train/default.yaml

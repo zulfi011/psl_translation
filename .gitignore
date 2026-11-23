@@ -1,0 +1,58 @@
+# ── Python ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ── Secrets ─────────────────────────────────────────────
+.env
+
+# ── Private — never published ───────────────────────────
+**/private/
+**/archive/
+STRATEGY.md
+research/paper/            # until the paper is submitted / on arXiv
+
+# ── Data (published separately, see STRATEGY.md) ────────
+fyp/data/raw/*
+fyp/data/landmarks/*
+fyp/data/split/*
+research/data/raw/*
+research/data/raw_extras/
+research/data/samples/
+research/data/metadata/collection/
+research/data/interim/*
+research/data/processed/*
+research/data/external/*
+!**/.gitkeep
+*.npy
+*.npz
+*.mp4
+*.mov
+*.avi
+
+# ── Experiment outputs: keep configs + metrics, not weights ──
+research/experiments/runs/**/*.pt
+research/experiments/runs/**/*.pth
+
+# ── Flutter app build output ────────────────────────────
+fyp/mobile/**/build/
+fyp/mobile/**/.dart_tool/
+fyp/mobile/**/.flutter-plugins*
+fyp/mobile/**/ios/Pods/
+fyp/mobile/**/android/.gradle/
+fyp/mobile/**/local.properties
+fyp/mobile/**/google-services.json
+fyp/mobile/**/GoogleService-Info.plist
+
+# ── OS / IDE ────────────────────────────────────────────
+~$*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

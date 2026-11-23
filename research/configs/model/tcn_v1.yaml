@@ -1,0 +1,2 @@
+name: tcn_v1
+params: {dropout: 0.4}

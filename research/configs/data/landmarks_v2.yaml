@@ -1,0 +1,20 @@
+# v2 preprocessing: fixed augmentations (on the fly), train/inference-consistent
+# imputation, body-relative normalisation.
+extractor: mediapipe_holistic_v1
+split: loso_nextval
+transforms:
+  # --- augmentations in raw image coordinates (training only) ---
+  - {name: mirror,          train_only: true, params: {p: 0.5}}
+  - {name: speed,           train_only: true, params: {p: 0.5, low: 0.8, high: 1.25}}
+  - {name: time_warp,       train_only: true, params: {p: 0.5, strength: 0.2}}
+  - {name: hand_dropout,    train_only: true, params: {p: 0.3, max_frac: 0.2}}
+  # --- always ---
+  - {name: trim_inactive,   params: {margin: 3}}
+  - {name: fill_missing_hands}
+  - {name: normalize_body}
+  # --- augmentations in normalised coordinates (training only) ---
+  - {name: affine,          train_only: true, params: {p: 0.8, scale: 0.1, rotate_deg: 10, shift: 0.05}}
+  - {name: gaussian_noise,  train_only: true, params: {p: 0.5, sigma: 0.01}}
+  # --- always ---
+  - {name: presence_flags}
+  - {name: resample,        params: {length: 60}}
