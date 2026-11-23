@@ -1,5 +1,0 @@
-# Redesigned TCN + v2 preprocessing.
-name: exp002_tcn_v2
-data: data/landmarks_v2.yaml
-model: model/tcn.yaml
-train: train/default.yaml

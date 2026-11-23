@@ -71,7 +71,7 @@ signs into **natural English sentences** with a large language model.
 | Input | 60 frames × 258 features |
 
 <p align="center">
-  <img src="fyp/results/training_curves.png" alt="Training and validation curves" width="85%">
+  <img src="results/training_curves.png" alt="Training and validation curves" width="85%">
 </p>
 
 ### Model: SignTCN
@@ -104,7 +104,7 @@ cd psl_translation && python3.12 -m venv .venv && source .venv/bin/activate
 ```
 
 ```bash
-pip install -e fyp
+pip install -e .
 ```
 
 **2. Add your OpenRouter API key** (only needed for the sentence step)
@@ -117,11 +117,11 @@ The translation step calls an LLM through [OpenRouter](https://openrouter.ai).
 2. Copy the example settings file and paste your key into it:
 
 ```bash
-cp fyp/.env.example fyp/.env
+cp .env.example .env
 ```
 
 ```ini
-# fyp/.env
+# .env
 OPENROUTER_API_KEY=sk-or-your-key-here
 OPENROUTER_MODEL=openai/gpt-4o-mini      # any OpenRouter model ID works
 ```
@@ -131,10 +131,6 @@ OPENROUTER_MODEL=openai/gpt-4o-mini      # any OpenRouter model ID works
 and the REST API need one.
 
 **3. Run**
-
-```bash
-cd fyp
-```
 
 ```bash
 python scripts/step6_realtime.py     # live sign recognition (webcam)
@@ -164,22 +160,37 @@ curl -F "video=@my_clip.mp4" http://localhost:5000/process
 }
 ```
 
-`GET /health` reports server status. Full details: [`fyp/README.md`](fyp/README.md).
+`GET /health` reports server status.
 
-## 📁 Repository structure
+## 🏋️ Training from scratch
+
+The raw videos are not included. Put your own clips in `data/raw/<sign>/`
+(naming convention in [`data/README.md`](data/README.md)), then run:
+
+```bash
+python scripts/step1_extract_landmarks.py   # videos → landmark arrays
+python scripts/step2_split_dataset.py       # person-aware train / val / test split
+python scripts/step3_augment.py             # augment the training set
+python scripts/step4_train.py               # train → models/best_model.pth
+python scripts/step5_evaluate.py            # plots → results/
+```
+
+## 📁 Project structure
 
 ```
 psl_translation/
-├── fyp/                      PSL Translator v1: the complete working system
-│   ├── src/psl_translator/   features, model, dataset, settings
-│   ├── scripts/              step1–5 training pipeline, step6–7 real-time demos
-│   ├── server/app.py         Flask REST API
-│   ├── models/               trained weights, label map, training log
-│   └── results/              training curves
-└── research/                 research codebase for the next version
-    ├── src/psl_research/     pluggable extractors, preprocessing and models
-    ├── configs/              experiment configs
-    └── scripts/              data, training and evaluation tools
+├── src/psl_translator/      core package
+│   ├── config.py            paths and settings (overridable via .env)
+│   ├── features.py          MediaPipe → 258-feature vectors
+│   ├── model.py             SignTCN model
+│   └── dataset.py           PyTorch dataset
+├── scripts/                 step1–5 training pipeline, step6–7 real-time demos
+├── server/app.py            Flask REST API
+├── models/                  trained weights, label map, training log
+├── results/                 training curves
+├── data/                    dataset location (not included)
+├── .env.example             settings template (your OpenRouter key goes in .env)
+└── pyproject.toml
 ```
 
 ## 🧭 Roadmap
@@ -187,8 +198,7 @@ psl_translation/
 - [x] Landmark-based sign recogniser (TCN) for 24 PSL signs
 - [x] Real-time continuous recognition with a sliding window
 - [x] LLM sentence generation and REST API
-- [x] Research codebase with leave-one-signer-out evaluation
-- [ ] Improved model trained with the research pipeline
+- [ ] Improved model with signer-independent evaluation
 - [ ] Mobile app release
 - [ ] Public landmark dataset
 

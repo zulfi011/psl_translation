@@ -13,22 +13,16 @@ venv/
 .env
 
 # ── Private — never published ───────────────────────────
-**/private/
-**/archive/
+private/
+archive/
 STRATEGY.md
-research/paper/            # until the paper is submitted / on arXiv
+# local research workspace (not published)
+research/
 
-# ── Data (published separately, see STRATEGY.md) ────────
-fyp/data/raw/*
-fyp/data/landmarks/*
-fyp/data/split/*
-research/data/raw/*
-research/data/raw_extras/
-research/data/samples/
-research/data/metadata/collection/
-research/data/interim/*
-research/data/processed/*
-research/data/external/*
+# ── Data (not included) ─────────────────────────────────
+data/raw/*
+data/landmarks/*
+data/split/*
 !**/.gitkeep
 *.npy
 *.npz
@@ -36,19 +30,15 @@ research/data/external/*
 *.mov
 *.avi
 
-# ── Experiment outputs: keep configs + metrics, not weights ──
-research/experiments/runs/**/*.pt
-research/experiments/runs/**/*.pth
-
 # ── Flutter app build output ────────────────────────────
-fyp/mobile/**/build/
-fyp/mobile/**/.dart_tool/
-fyp/mobile/**/.flutter-plugins*
-fyp/mobile/**/ios/Pods/
-fyp/mobile/**/android/.gradle/
-fyp/mobile/**/local.properties
-fyp/mobile/**/google-services.json
-fyp/mobile/**/GoogleService-Info.plist
+mobile/**/build/
+mobile/**/.dart_tool/
+mobile/**/.flutter-plugins*
+mobile/**/ios/Pods/
+mobile/**/android/.gradle/
+mobile/**/local.properties
+mobile/**/google-services.json
+mobile/**/GoogleService-Info.plist
 
 # ── OS / IDE ────────────────────────────────────────────
 ~$*

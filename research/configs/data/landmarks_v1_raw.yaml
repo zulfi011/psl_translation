@@ -1,6 +1,0 @@
-# Reproduces FYP v1 preprocessing (no normalisation, no augmentation) on the new split,
-# so the v1 model can be compared fairly.
-extractor: mediapipe_holistic_v1
-split: loso_nextval
-transforms:
-  - {name: resample, params: {length: 60}}
