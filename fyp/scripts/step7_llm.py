@@ -28,7 +28,7 @@ OpenRouter setup
 ----------------
   1. Create a free account at https://openrouter.ai
   2. Generate an API key from the dashboard.
-  3. Put it in a .env file in the repo root:  OPENROUTER_API_KEY=sk-or-...
+  3. Put it in fyp/.env:  OPENROUTER_API_KEY=sk-or-...
      (see .env.example)
 
 Model choice
