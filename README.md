@@ -34,15 +34,9 @@ signs into **natural English sentences** with a large language model.
 
 ## ⚙️ How it works
 
-```mermaid
-flowchart LR
-    A[🎥 Video / webcam] --> B[MediaPipe Holistic<br/>hand + pose landmarks]
-    B --> C[60 frames × 258 features]
-    C --> D[TCN classifier<br/>24 signs]
-    D --> E[Sliding window<br/>sign tokens]
-    E --> F[LLM via OpenRouter]
-    F --> G[💬 English sentences]
-```
+<p align="center">
+🎥 <b>Video / webcam</b> &nbsp;→&nbsp; 🖐️ <b>MediaPipe landmarks</b> &nbsp;→&nbsp; 🧠 <b>TCN classifier</b> &nbsp;→&nbsp; 🔤 <b>Sign tokens</b> &nbsp;→&nbsp; 🤖 <b>LLM</b> &nbsp;→&nbsp; 💬 <b>English sentences</b>
+</p>
 
 1. **Landmarks.** MediaPipe Holistic tracks both hands (21 points each) and the
    upper body (33 pose points) in every frame: 258 numbers per frame. Using
@@ -57,18 +51,16 @@ flowchart LR
 
 ## 🖐️ Supported signs
 
-| | | | | | |
-|:-:|:-:|:-:|:-:|:-:|:-:|
-| I | you | friend | teacher | student | school |
-| salam | morning | thank you | please | sorry | good |
-| come | go | eat | water | home | phone |
-| help | learn | like | want | no | *(idle)* |
+<div align="center">
+<table>
+<tr><td align="center" width="110">I</td><td align="center" width="110">you</td><td align="center" width="110">friend</td><td align="center" width="110">teacher</td><td align="center" width="110">student</td><td align="center" width="110">school</td></tr>
+<tr><td align="center" width="110">salam</td><td align="center" width="110">morning</td><td align="center" width="110">thank you</td><td align="center" width="110">please</td><td align="center" width="110">sorry</td><td align="center" width="110">good</td></tr>
+<tr><td align="center" width="110">come</td><td align="center" width="110">go</td><td align="center" width="110">eat</td><td align="center" width="110">water</td><td align="center" width="110">home</td><td align="center" width="110">phone</td></tr>
+<tr><td align="center" width="110">help</td><td align="center" width="110">learn</td><td align="center" width="110">like</td><td align="center" width="110">want</td><td align="center" width="110">no</td><td align="center" width="110"><i>(idle)</i></td></tr>
+</table>
+</div>
 
 ## 📊 Results
-
-<table>
-<tr>
-<td>
 
 | Metric | Value |
 |---|---|
@@ -78,12 +70,9 @@ flowchart LR
 | Parameters | 497,240 |
 | Input | 60 frames × 258 features |
 
-</td>
-<td width="55%">
-<img src="fyp/results/training_curves.png" alt="Training curves">
-</td>
-</tr>
-</table>
+<p align="center">
+  <img src="fyp/results/training_curves.png" alt="Training and validation curves" width="85%">
+</p>
 
 ### Model: SignTCN
 
